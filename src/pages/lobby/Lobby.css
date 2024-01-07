@@ -1,0 +1,18 @@
+.lobby-cont {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7vmin;
+    span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 4vmin;
+        Input {
+            width: 70vw;
+        }
+    }
+}

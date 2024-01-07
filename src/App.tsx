@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Lobby from './pages/lobby/Lobby';
 import Chat from './pages/chat/Chat';
+import './App.css';
 
 
 const App: React.FC = () => {
