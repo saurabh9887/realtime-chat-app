@@ -1,3 +1,15 @@
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+:root {
+    /* font sizes */
+    --font-extra-small: 6px;
+    --font-small: 8px;
+    --font-medium: 14px;
+    --font-large: 16px;
+    /* colors */
+    --white: #FFFFFF;
+    --pale-blue: #a4b2e6;
+    --lavender: #aa9ce3;
+    --light-grey: #C5C5C5;
+}

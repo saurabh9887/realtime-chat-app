@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Lobby from './pages/lobby/Lobby';
 import Chat from './pages/chat/Chat';
@@ -11,6 +11,7 @@ const App: React.FC = () => {
         <Routes>
             <Route path='/' element={ <Lobby /> } />
             <Route path='/room/:roomCode' element={ <Chat /> } />
+            <Route path="/*" element={ <Navigate to='/' replace /> } />
         </Routes>
     )
 }

@@ -1,0 +1,77 @@
+@import '../../App.css';
+
+
+.chat-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vmin;
+    .msg-box {
+        border: 1px solid var(--lavender);
+        border-radius: var(--font-small);
+        height: 90vh;
+        overflow-y: auto;
+        padding-bottom: 1vmin;
+        > .ant-input-group-wrapper {
+            width: fit-content;
+            overflow: hidden;
+            padding: 1vmin 1vmin 0vmin 1vmin;
+            float: right;
+            top: 0;
+            position: sticky;
+            input {
+                pointer-events: none;
+                overflow: hidden;
+                background: var(--white);
+                color: gray;
+            }
+            .ant-input-group-addon {
+                background: var(--white);
+                color: gray;
+            }
+            .ant-input-group-addon:last-child {
+                cursor: pointer;
+            }
+        }
+        div {
+            border: 2px solid var(--lavender);
+            background-color: var(--lavender);
+            padding: 1vmin;
+            margin-top: 1vmin;
+            margin-left: 1vmin;
+            margin-right: 1vmin;
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--font-small);
+            gap: 0.5vmin;
+            clear: both;
+            width: 40vw;
+            word-break: break-all;
+            :first-child {
+                color: white;
+                font-size: var(--font-small);
+            }
+            :nth-child(2) {
+                color: var(--white);
+                font-size: var(--font-medium);
+            }
+            :last-child {
+                color: white;
+                font-size: var(--font-extra-small);
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .align-rhs {
+            float: right;
+            border: 2px solid var(--pale-blue);
+            background-color: var(--pale-blue);
+        }
+    }
+    .action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1vmin;
+    }
+}

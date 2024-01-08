@@ -10,16 +10,17 @@ const Lobby: React.FC = () => {
 
     const [name, setName] = useState<string>('');
     const [roomCode, setRoomCode] = useState<string>('');
+    const userId = Date.now().toString();
 
     const handleJoinRoom = useCallback(() => {
-        if (roomCode !== '' && name !== '') {
-            navigate(`/room/${roomCode}`);
+        if (roomCode !== '' && name !== '' && userId) {
+            navigate(`/room/${roomCode}`, {state: {userId: userId, name: name}});
         }
-    }, [navigate, roomCode, name]);
+    }, [navigate, roomCode, name, userId]);
 
     return (
         <div className='lobby-cont'>
-            <h1> Welcome to free chat app </h1>
+            <h1> Welcome to Chat App </h1>
             <span>
                 <Input 
                     value={name} 
