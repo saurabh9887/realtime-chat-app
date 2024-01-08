@@ -18,8 +18,8 @@ const Chat: React.FC = () => {
     const [messages, setMessages] = useState<Pubnub.MessageEvent[]>([]);
 
     const pubnub = new Pubnub({
-        publishKey: process.env.REACT_APP_PUB_KEY,
-        subscribeKey: process.env.REACT_APP_SUB_KEY,
+        publishKey: 'pub-c-9230884a-3b07-4985-8b26-011f59e267c4',
+        subscribeKey: 'sub-c-e4979b20-a443-447b-a40d-ac85985f5547',
         userId: state ? state.userId : Date.now().toString()
     });
 
