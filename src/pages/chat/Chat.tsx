@@ -3,6 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { message, Input, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons'
 import Pubnub from 'pubnub';
+import config from '../../config/config.json'
 import './Chat.css';
 
 
@@ -18,8 +19,8 @@ const Chat: React.FC = () => {
     const [messages, setMessages] = useState<Pubnub.MessageEvent[]>([]);
 
     const pubnub = new Pubnub({
-        publishKey: 'pub-c-9230884a-3b07-4985-8b26-011f59e267c4',
-        subscribeKey: 'sub-c-e4979b20-a443-447b-a40d-ac85985f5547',
+        publishKey: config['PUB_KEY'],
+        subscribeKey: config['SUB_KEY'],
         userId: state ? state.userId : Date.now().toString()
     });
 
