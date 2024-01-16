@@ -1,22 +1,28 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { joinRoom } from '../../redux/slices/room';
+import { addUser } from '../../redux/slices/user';
 import './Lobby.css';
 
 
 const Lobby: React.FC = () => {
     const targetInputRef = useRef<any>(null);
+    
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [name, setName] = useState<string>('');
     const [roomCode, setRoomCode] = useState<string>('');
-    const userId = Date.now().toString();
 
     const handleJoinRoom = useCallback(() => {
-        if (roomCode !== '' && name !== '' && userId) {
-            navigate(`/room/${roomCode}`, {state: {userId: userId, name: name}});
+        if (roomCode !== '' && name !== '') {
+            dispatch(addUser({id: Date.now().toString(), name: name}))
+            dispatch(joinRoom(roomCode));
+            navigate(`/room/${roomCode}`);
         }
-    }, [navigate, roomCode, name, userId]);
+    }, [dispatch, navigate, roomCode, name]);
 
     return (
         <div className='lobby-cont'>
@@ -40,7 +46,7 @@ const Lobby: React.FC = () => {
                     onPressEnter={handleJoinRoom}
                 />
                 <Button 
-                    onClick={handleJoinRoom} 
+                    onClick={handleJoinRoom}
                     disabled={name === '' || roomCode === ''} 
                     type='primary'
                 > 

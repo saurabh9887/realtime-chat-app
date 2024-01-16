@@ -1,34 +1,36 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { message, Input, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons'
 import Pubnub from 'pubnub';
 import config from '../../config/config.json'
 import './Chat.css';
+import { getUserDataSelector } from '../../redux/slices/user';
+import { getRoomDataSelector } from '../../redux/slices/room';
+import { useSelector } from 'react-redux';
 
 
 const Chat: React.FC = () => {
     const msgCont = useRef<HTMLDivElement>(null);
 
     const navigate = useNavigate();
-
-    const { roomCode } = useParams();
-    const { state }  = useLocation();
-
+    const roomCode = useSelector(getRoomDataSelector);
+    const user = useSelector(getUserDataSelector);
+    
     const [typedMessage, setTypedMessage] = useState<string>('');
     const [messages, setMessages] = useState<Pubnub.MessageEvent[]>([]);
 
     const pubnub = new Pubnub({
         publishKey: config['PUB_KEY'],
         subscribeKey: config['SUB_KEY'],
-        userId: state ? state.userId : Date.now().toString()
+        uuid: user.id || Date.now().toString(),
     });
 
     useEffect(() => {
-        if (state === null) {
+        if (user.id === '') {
             navigate('/');
         }
-    }, [navigate, state]);
+    }, [navigate, user]);
     
     /* add listener */
     useEffect(() => {
@@ -79,7 +81,7 @@ const Chat: React.FC = () => {
             pubnub.publish({
                 channel: roomCode,
                 message: {
-                    'name': state?.name,
+                    'name': user.name,
                     'msg': typedMessage,
                     'time': time()
                 }
@@ -117,7 +119,7 @@ const Chat: React.FC = () => {
                 <Input type='text' addonBefore="Room code" addonAfter={<CopyOutlined onClick={copyRoomCode} />} defaultValue={roomCode} />
                 {
                     messages.map((msg) => (
-                        <div key={msg.message?.time} className={msg.publisher === state?.userId ? 'align-rhs': ''}> 
+                        <div key={msg.message?.time} className={msg.publisher === user.id ? 'align-rhs': ''}> 
                             <span> ~{msg.message?.name} </span>
                             <span> {msg.message?.msg} </span>
                             <span> {msg.message?.time} </span>
